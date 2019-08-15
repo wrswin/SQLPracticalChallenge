@@ -75,3 +75,23 @@ CREATE TABLE Booking (
     CHECK (LEN(CAST(EventYear AS NVARCHAR(10))) = 4),
     CHECK (Payment > 0)
 );
+
+INSERT INTO Tour (TourName, Description) VALUES
+    ('North', 'A tour of a northern part of somewhere'),
+    ('South', 'Cancelled due to badgers')
+;
+
+INSERT INTO Client (ClientId, Surname, GivenName, Gender) VALUES
+    (1, 'Edgar', 'Alyx', NULL),
+    (102506005, 'Wayde', 'Reitsma', 'M')
+;
+
+INSERT INTO Event (TourName, EventMonth, EventDay, EventYear, EventFee) VALUES
+    ('North', 'Mar', 23, 2077, 2000),
+    ('North', 'Aug', 04, 2042, 1000.01)
+;
+
+INSERT INTO Booking (ClientId, TourName, EventMonth, EventDay, EventYear, Payment, DateBooked) VALUES
+    (1, 'North', 'Aug', 04, 2042, 1001, '2025-10-01'),
+    (102506005, 'North', 'Mar', 23, 2077, 2000, '2030-04-12')
+;
