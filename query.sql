@@ -19,6 +19,7 @@ Foreign Key (ClientID) References Client
 
 */
 
+DROP VIEW IF EXISTS BOOKINGS
 DROP TABLE IF EXISTS Booking;
 DROP TABLE IF EXISTS Event;
 DROP TABLE IF EXISTS Client;
@@ -118,4 +119,17 @@ SELECT *
         SELECT AVG(B.Payment)
             FROM Booking B
     )
+;
+
+GO
+
+CREATE VIEW Bookings AS
+    SELECT C.GivenName, C.Surname, T.TourName, T.Description, E.EventYear, E.EventMonth, E.EventDay, E.EventFee, B.DateBooked, B.Payment
+        FROM Booking as B
+        INNER JOIN Event E
+        ON (E.TourName = B.TourName AND E.EventMonth = B.EventMonth AND E.EventDay = B.EventDay AND E.EventYear = B.EventYear)
+        INNER JOIN Tour T
+        ON (T.TourName = B.TourName)
+        INNER JOIN Client C
+        ON (C.ClientId = B.ClientId)
 ;
