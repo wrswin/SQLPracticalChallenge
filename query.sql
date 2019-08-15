@@ -95,3 +95,27 @@ INSERT INTO Booking (ClientId, TourName, EventMonth, EventDay, EventYear, Paymen
     (1, 'North', 'Aug', 04, 2042, 1001, '2025-10-01'),
     (102506005, 'North', 'Mar', 23, 2077, 2000, '2030-04-12')
 ;
+
+SELECT C.GivenName, C.Surname, T.TourName, T.Description, E.EventYear, E.EventMonth, E.EventDay, E.EventFee, B.DateBooked, B.Payment
+    FROM Booking as B
+    INNER JOIN Event E
+    ON (E.TourName = B.TourName AND E.EventMonth = B.EventMonth AND E.EventDay = B.EventDay AND E.EventYear = B.EventYear)
+    INNER JOIN Tour T
+    ON (T.TourName = B.TourName)
+    INNER JOIN Client C
+    ON (C.ClientId = B.ClientId)
+;
+
+SELECT B.EventMonth, B.TourName, COUNT(B.ClientId)
+    FROM Booking as B
+    GROUP BY B.EventMonth, B.TourName
+    ORDER BY B.EventMonth ASC, B.TourName ASC
+;
+
+SELECT *
+    FROM Booking B
+    WHERE B.Payment > (
+        SELECT AVG(B.Payment)
+            FROM Booking B
+    )
+;
