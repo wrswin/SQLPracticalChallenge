@@ -133,3 +133,34 @@ CREATE VIEW Bookings AS
         INNER JOIN Client C
         ON (C.ClientId = B.ClientId)
 ;
+
+GO
+
+/*
+This query returns the number of rows in Booking.
+
+If Query 1 is correct, the number of rows returned should be equal to the number of rows in Booking.
+
+If Query 2 is correct, the total of the counts returned should be equal to the number of rows in Booking.
+*/
+SELECT COUNT(B.ClientId)
+    FROM Booking B
+;
+
+/*
+This query return the average of the Payment column in Booking.
+
+If Query 3 is correct, no value of Payment in Query 3's results should be less than the average.
+*/
+SELECT AVG(B.Payment)
+    FROM Booking B
+;
+
+/*
+This query returns the unique combinations of EventMonth and TourName in Booking.
+
+If Query 2 is correct, the rows it return should match the unique combinations of EventMonth and TourName.
+*/
+SELECT DISTINCT B.EventMonth, B.TourName
+    FROM Booking B
+;
